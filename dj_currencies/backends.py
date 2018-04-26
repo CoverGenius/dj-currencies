@@ -17,6 +17,7 @@ logger = logging.getLogger(__name__)
 
 
 class BaseRateBackend(object):
+
     def get_latest_rates(self, base_currency=currency_settings.BASE_CURRENCY, symbols=None):
         """
         Fetch latest rates for one base currency
@@ -86,7 +87,8 @@ class OpenExchangeBackend(BaseRateBackend):
         exchange_rate = rate_qs[0]
 
         if exchange_rate.base_currency != currency_from:
-            rate_from = exchange_rate.rates.get(currency_to)
+            rate_from = exchange_rate.rates.get(currency_from)
+            rate_from = Decimal(str(rate_from)).quantize(Decimal('.000001'))
         else:
             # If currency from is the same as base currency its rate is 1.
             rate_from = Decimal(1)
@@ -94,7 +96,7 @@ class OpenExchangeBackend(BaseRateBackend):
         if isinstance(amount, float):
             amount = Decimal(amount).quantize(Decimal('.000001'))
 
-        rate_to = exchange_rate.rates.get(currency_to)
+        rate_to = Decimal(str(exchange_rate.rates.get(currency_to))).quantize(Decimal('.000001'))
 
         if not rate_to:
             raise RateBackendError(
