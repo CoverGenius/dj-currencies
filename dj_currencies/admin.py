@@ -9,7 +9,7 @@ class ExchangeRateAdmin(admin.ModelAdmin):
         'last_updated_at',
     )
     list_filter = ('source', 'base_currency',)
-    date_hierarchy = 'last_dated_at'
+    date_hierarchy = 'last_updated_at'
 
 
 admin.site.register(ExchangeRate, ExchangeRateAdmin)
