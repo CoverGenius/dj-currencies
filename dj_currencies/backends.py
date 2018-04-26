@@ -57,7 +57,7 @@ class OpenExchangeBackend(BaseRateBackend):
     def get_cached_rates(self, symbols=None):
         ex_rate = ExchangeRate.objects.order_by('-last_updated_at')[0]
         if symbols:
-            rates = map(lambda x: ex_rate.rates.get(symbol) for symbol in symbols)
+            rates = [ex_rate.rates.get(symbol) for symbol in symbols]
             return dict(zip(symbols, rates))
         else:
             return ex_rate.rates
