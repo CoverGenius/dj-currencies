@@ -56,6 +56,14 @@ class OpenExchangeBackend(BaseRateBackend):
             url = url + '&symbols={0}'.format(symbol_args)
         return url
 
+    def get_cached_rates(self, symbols=None):
+        ex_rate = ExchangeRate.objects.order_by('-last_updated_at')[0]
+        if symbols:
+            rates = map(lambda x: ex_rate.rates.get(symbol) for symbol in symbols)
+            return dict(zip(symbols, rates))
+        else:
+            return ex_rate.rates
+
     def get_latest_rates(self, base_currency=currency_settings.BASE_CURRENCY, symbols=None):
         url = self.get_end_point_url(base_currency, symbols)
 
