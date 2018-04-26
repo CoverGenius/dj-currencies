@@ -7,10 +7,7 @@ from django.core.exceptions import ImproperlyConfigured
 from dj_currencies.sources import CurrencyDataExchangeSource
 from .settings import currency_settings
 
-try:
-    from urllib2 import urlopen
-except ImportError:
-    from urllib.request import urlopen
+from urllib.request import urlopen
 
 from .exceptions import RateBackendError
 from .models import ExchangeRate
