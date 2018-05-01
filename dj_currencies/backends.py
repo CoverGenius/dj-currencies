@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 
 class BaseRateBackend(object):
 
-    def get_latest_rates(self, base_currency=currency_settings.BASE_CURRENCY, symbols=None):
+    def get_latest_rates(self, base_currency=currency_settings.BASE_CURRENCIES[0], symbols=None):
         """
         Fetch latest rates for one base currency
         :param base_currency: a three letter currency symbol
@@ -38,7 +38,7 @@ class OpenExchangeBackend(BaseRateBackend):
             raise ImproperlyConfigured(
                 "OPENEXCHANGE_APP_ID setting should not be empty when using OpenExchangeBackend")
 
-        if not currency_settings.BASE_CURRENCY:
+        if not currency_settings.BASE_CURRENCIES:
             raise ImproperlyConfigured(
                 "BASE_CURRENCY setting should not be empty. It should be set as a three letter currency code")
 
@@ -62,7 +62,7 @@ class OpenExchangeBackend(BaseRateBackend):
         else:
             return ex_rate.rates
 
-    def get_latest_rates(self, base_currency=currency_settings.BASE_CURRENCY, symbols=None):
+    def get_latest_rates(self, base_currency=currency_settings.BASE_CURRENCIES[0], symbols=None):
         url = self.get_end_point_url(base_currency, symbols)
 
         try:
@@ -73,36 +73,27 @@ class OpenExchangeBackend(BaseRateBackend):
             raise RateBackendError("Error retrieving rates: %s" % e)
 
     def update_rates(self):
-        rates = self.get_latest_rates(currency_settings.BASE_CURRENCY)
-        return ExchangeRate.objects.create(
-            base_currency=currency_settings.BASE_CURRENCY,
-            rates=rates,
-            source=CurrencyDataExchangeSource.OPENEXCHANGERATES,
-        )
+        for currency in currency_settings.BASE_CURRENCIES:
+            print('Updating exchange rates with base currency {0}'.format(currency))
+            rates = self.get_latest_rates(currency)
+            ExchangeRate.objects.create(
+                base_currency=currency,
+                rates=rates,
+                source=CurrencyDataExchangeSource.OPENEXCHANGERATES,
+            )
 
     def convert_money(self, amount, currency_from, currency_to):
-        rate_qs = ExchangeRate.objects.order_by('-last_updated_at')
-        if not rate_qs.exists():
-            raise RateBackendError('No cached exchange rates, please run ./manage.py update_exchange_rates')
-        exchange_rate = rate_qs[0]
-
-        if exchange_rate.base_currency != currency_from:
-            rate_from = exchange_rate.rates.get(currency_from)
-            rate_from = Decimal(str(rate_from)).quantize(Decimal('.000001'))
-        else:
-            # If currency from is the same as base currency its rate is 1.
-            rate_from = Decimal(1)
+        ex_rate = ExchangeRate.objects.base_currency(currency_from).within_days(3)
 
         if isinstance(amount, float):
             amount = Decimal(amount).quantize(Decimal('.000001'))
 
-        rate_to = Decimal(str(exchange_rate.rates.get(currency_to))).quantize(Decimal('.000001'))
+        rate_to = ex_rate.rates.get(currency_to)
 
         if not rate_to:
             raise RateBackendError(
-                'No exchange rate found from {0} to {1}'.format(exchange_rate.base_currency, currency_to))
-        converted_amount = (amount / rate_from) * rate_to
+                'No exchange rate found from {0} to {1}'.format(ex_rate.base_currency, currency_to))
+        rate_to = Decimal(str(rate_to)).quantize(Decimal('.000001'))
+        converted_amount = amount * rate_to
 
         return converted_amount.quantize(Decimal('1.00'))
-
-

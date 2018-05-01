@@ -27,13 +27,13 @@ USER_SETTINGS = getattr(settings, 'DJANGO_CURRENCIES', None)
 DEFAULTS = {
     'DEFAULT_BACKEND': 'dj_currencies.backends.OpenExchangeBackend',
     'OPENEXCHANGE_APP_ID': '',
-    'BASE_CURRENCY': 'USD',
+    'BASE_CURRENCIES': ['USD'],
 }
 
 # List of settings that cannot be empty
 MANDATORY = (
     'DEFAULT_BACKEND',
-    'BASE_CURRENCY',
+    'BASE_CURRENCIES',
 )
 
 # List of settings that may be in string import notation.
