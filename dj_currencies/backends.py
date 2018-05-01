@@ -83,7 +83,7 @@ class OpenExchangeBackend(BaseRateBackend):
             )
 
     def convert_money(self, amount, currency_from, currency_to):
-        ex_rate = ExchangeRate.objects.base_currency(currency_from).within_days(3)
+        ex_rate = ExchangeRate.objects.base_currency(currency_from).within_days(currency_settings.MAX_CACHE_DAYS)
 
         if isinstance(amount, float):
             amount = Decimal(amount).quantize(Decimal('.000001'))

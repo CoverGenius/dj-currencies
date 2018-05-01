@@ -10,6 +10,7 @@ DJANGO_CURRENCIES = {
     'DEFAULT_BACKEND': 'djmoney_rates.backends.OpenExchangeBackend',
     'OPENEXCHANGE_APP_ID': '',
     'CURRENCY_EXCHANGE_SOURCE': 'USD',
+    'MAX_CACHE_DAYS': 7
 }
 
 This module provides the `currency_settings` object, that is used to access
@@ -28,6 +29,7 @@ DEFAULTS = {
     'DEFAULT_BACKEND': 'dj_currencies.backends.OpenExchangeBackend',
     'OPENEXCHANGE_APP_ID': '',
     'BASE_CURRENCIES': ['USD'],
+    'MAX_CACHE_DAYS': 7
 }
 
 # List of settings that cannot be empty
