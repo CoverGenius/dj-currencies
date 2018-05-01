@@ -37,6 +37,5 @@ class OpenExchangeRateBackendTestCase(TestCase):
         ExchangeRateFactory(rates={
             'USD': 0.75,
         }, base_currency='AUD')
-        print(ExchangeRate.objects.count())
         with self.assertRaises(RateBackendError):
             self.assertEqual(convert_money(1, 'USD', 'AUD'), Decimal('1.5'))
