@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 
 class BaseRateBackend(object):
 
-    def get_latest_rates(self, base_currency=currency_settings.BASE_CURRENCIES[0], symbols=None):
+    def get_latest_rates(self, base_currency, symbols=None):
         """
         Fetch latest rates for one base currency
         :param base_currency: a three letter currency symbol
@@ -62,7 +62,7 @@ class OpenExchangeBackend(BaseRateBackend):
         else:
             return ex_rate.rates
 
-    def get_latest_rates(self, base_currency=currency_settings.BASE_CURRENCIES[0], symbols=None):
+    def get_latest_rates(self, base_currency, symbols=None):
         url = self.get_end_point_url(base_currency, symbols)
 
         try:
