@@ -40,7 +40,7 @@ class OpenExchangeBackend(BaseRateBackend):
 
         if not currency_settings.BASE_CURRENCIES:
             raise ImproperlyConfigured(
-                "BASE_CURRENCY setting should not be empty. It should be set as a three letter currency code")
+                "BASE_CURRENCIES setting should not be empty. It should be set as a three letter currency code")
 
         # Build the base api url
         self.base_url = 'https://openexchangerates.org/api/latest.json?app_id={0}'.format(
