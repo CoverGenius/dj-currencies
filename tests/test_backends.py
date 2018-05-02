@@ -1,19 +1,15 @@
 from __future__ import unicode_literals
 from decimal import Decimal
-from unittest import TestCase
 from django.core.exceptions import ImproperlyConfigured
+from django.test import TransactionTestCase
 from dj_currencies.apis import convert_money
 from dj_currencies.backends import OpenExchangeBackend
 from dj_currencies.exceptions import RateBackendError
 from dj_currencies.factory import ExchangeRateFactory
-from dj_currencies.models import ExchangeRate
 from dj_currencies.settings import currency_settings
 
 
-class OpenExchangeRateBackendTestCase(TestCase):
-
-    def tearDown(self):
-        ExchangeRate.objects.all().delete()
+class OpenExchangeRateBackendTestCase(TransactionTestCase):
 
     def test_no_app_id_configured(self):
         currency_settings.OPENEXCHANGE_APP_ID = None
