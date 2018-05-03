@@ -9,7 +9,7 @@ For example your project's `settings.py` file might look like this:
 DJANGO_CURRENCIES = {
     'DEFAULT_BACKEND': 'djmoney_rates.backends.OpenExchangeBackend',
     'OPENEXCHANGE_APP_ID': '',
-    'CURRENCY_EXCHANGE_SOURCE': 'USD',
+    'BASE_CURRENCIES': 'USD',
     'MAX_CACHE_DAYS': 7
 }
 
