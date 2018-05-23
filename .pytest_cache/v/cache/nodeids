@@ -1,4 +1,0 @@
-[
-  "tests/test_backends.py::OpenExchangeRateBackendTestCase::test_backend_generates_correct_url",
-  "tests/test_backends.py::OpenExchangeRateBackendTestCase::test_no_app_id_configured"
-]
