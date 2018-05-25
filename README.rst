@@ -28,24 +28,35 @@ Add it to your `INSTALLED_APPS`:
 Settings
 ========
 
-.. code-blocks:: python
+
+.. code-block:: python
 
     DJANGO_CURRENCIES = {
         'DEFAULT_BACKEND': 'djmoney_rates.backends.OpenExchangeBackend',
         'OPENEXCHANGE_APP_ID': '',
-        'BASE_CURRENCIES': 'USD',
+        'BASE_CURRENCIES': ['USD'],
         'MAX_CACHE_DAYS': 7
     }
 
-You will need to have at least "OPENEXCHANGE_APP_ID" configured
+**DEFAULT_BACKEND**: The selected backend to sync exchange rates
 
-*s*fsd
+**OPENEXCHANGE_APP_ID**: Must be configured if you use **OpenExchangeBackend**
+
+**BASE_CURRENCIES**: A list of base currencies to use. At the time of this version, you will only be able to convert currency from any one of the base currency to target currency.
+
+**MAX_CACHE_DAYS**: Only use the cache within this time limit. If exchange rates was not synced within the time frame, an exception will thrown
+
+.. NOTE::
+   You will need to have at least "OPENEXCHANGE_APP_ID" configured if you use **OpenExchangeBackend**
+
+
 
 Features
 --------
 
 * [open exchange rates](openexchangerates.org) integration
 * Extensible backend design, hook your own exchange rate sources
+* Multi base currencies support, no double conversion to lose precision
 * Store historical exchange rates
 * offline currency conversion
 
