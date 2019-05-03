@@ -1,17 +1,16 @@
 from __future__ import unicode_literals
-import logging
-import json
+
 from decimal import Decimal
-
-from django.core.exceptions import ImproperlyConfigured
-from dj_currencies.sources import CurrencyDataExchangeSource
-from .settings import currency_settings
-
+import json
+import logging
 from urllib.request import urlopen
 
+from django.core.exceptions import ImproperlyConfigured
+
+from dj_currencies.sources import CurrencyDataExchangeSource
 from .exceptions import RateBackendError
 from .models import ExchangeRate
-
+from .settings import currency_settings
 
 logger = logging.getLogger(__name__)
 
@@ -58,10 +57,11 @@ class OpenExchangeBackend(BaseRateBackend):
         if not symbols:
             return {}
 
-        ex_rate = ExchangeRate.objects.order_by('-last_updated_at')
-        rates = [ex_rate.filter(base_currency=symbol)[0].rates for symbol in symbols]
+        ex_rates = ExchangeRate.objects.order_by('base_currency', '-last_updated_at').filter(
+            base_currency__in=symbols
+        ).distinct('base_currency')[:len(symbols)]
 
-        return dict(zip(symbols, rates))
+        return {ex_rate.base_currency: ex_rate.rates for ex_rate in ex_rates}
 
     def get_latest_rates(self, base_currency, symbols=None):
         url = self.get_end_point_url(base_currency, symbols)
@@ -84,7 +84,8 @@ class OpenExchangeBackend(BaseRateBackend):
             )
 
     def convert_money(self, amount, currency_from, currency_to):
-        ex_rate = ExchangeRate.objects.base_currency(currency_from).within_days(currency_settings.MAX_CACHE_DAYS)
+        ex_rate = ExchangeRate.objects.base_currency(currency_from).within_days(
+            currency_settings.MAX_CACHE_DAYS)
 
         if isinstance(amount, float):
             amount = Decimal(amount).quantize(Decimal('.000001'))
