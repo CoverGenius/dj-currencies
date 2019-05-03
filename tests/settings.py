@@ -12,10 +12,10 @@ SECRET_KEY = "bynt$r#e8#+(qwjpx4g1_s5%nv8&(6%ah@)hfl+0qk8b(-ius^"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'test_db',
-        'USER': 'postgres',
+        'NAME': 'xcover',
+        'USER': 'xcover_dev',
         'HOST': 'localhost',
-        'PASSWORD': '',
+        'PASSWORD': 'xcover_local_pwd',
         'PORT': '5432',
     }
 }
