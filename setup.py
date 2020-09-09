@@ -56,7 +56,10 @@ setup(
         'dj_currencies',
     ],
     include_package_data=True,
-    install_requires=['psycopg2-binary'],
+    install_requires=[
+        'psycopg2-binary',
+        'Django>=3.0.0'
+    ],
     license="MIT",
     zip_safe=False,
     keywords='dj-currencies',

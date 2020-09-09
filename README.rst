@@ -3,6 +3,7 @@
 .. image:: https://travis-ci.org/brightwrite/dj-currencies.svg?branch=master
     :target: https://travis-ci.org/brightwrite/dj-currencies
 
+
 Documentation
 -------------
 
@@ -10,6 +11,10 @@ The full documentation is at https://dj-currencies.readthedocs.io.
 
 Quickstart
 ----------
+
+version 1.0.0 supports Django 3+ only
+
+For Django 2 support, please use version 0.1.2
 
 Install djcurrencies::
 
