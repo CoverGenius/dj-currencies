@@ -49,3 +49,7 @@ docs/_build
 .pytest_cache/
 
 .eggs/
+
+# virtual envs
+.venv
+venv
