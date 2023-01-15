@@ -8,7 +8,7 @@ from django.test import TransactionTestCase
 from dj_currencies.apis import convert_money, get_latest_cached_rates
 from dj_currencies.backends import OpenExchangeBackend
 from dj_currencies.exceptions import RateBackendError
-from dj_currencies.factory import ExchangeRateFactory
+from dj_currencies.factories import ExchangeRateFactory
 from dj_currencies.settings import currency_settings
 
 

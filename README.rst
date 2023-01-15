@@ -16,6 +16,8 @@ version 1.0.0 supports Django 3+ only
 
 For Django 2 support, please use version 0.1.2
 
+For Django 4 support, please user version >=2.0.0
+
 Install djcurrencies::
 
     pip install dj-currencies

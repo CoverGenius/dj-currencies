@@ -58,7 +58,7 @@ setup(
     include_package_data=True,
     install_requires=[
         'psycopg2-binary',
-        'Django>=3.0.0'
+        'Django>=4.0'
     ],
     license="MIT",
     zip_safe=False,
