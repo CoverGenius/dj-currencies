@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 """
 This module is largely inspired by django-rest-framework settings.
 
@@ -28,7 +26,7 @@ DEFAULTS = {
     'DEFAULT_BACKEND': 'dj_currencies.backends.OpenExchangeBackend',
     'OPENEXCHANGE_APP_ID': '',
     'BASE_CURRENCIES': ['USD'],
-    'MAX_CACHE_DAYS': 7
+    'MAX_CACHE_DAYS': 7,
 }
 
 # List of settings that cannot be empty
@@ -38,9 +36,7 @@ MANDATORY = (
 )
 
 # List of settings that may be in string import notation.
-IMPORT_STRINGS = (
-    'DEFAULT_BACKEND',
-)
+IMPORT_STRINGS = ('DEFAULT_BACKEND',)
 
 
 def perform_import(val, setting_name):
@@ -65,11 +61,13 @@ def import_from_string(val, setting_name):
         module = import_module(module_path)
         return getattr(module, class_name)
     except ImportError as e:
-        msg = "Could not import '%s' for setting '%s'. %s: %s." % (val, setting_name, e.__class__.__name__, e)
+        msg = "Could not import '{}' for setting '{}'. {}: {}.".format(
+            val, setting_name, e.__class__.__name__, e
+        )
         raise ImportError(msg)
 
 
-class CurrencySettings(object):
+class CurrencySettings:
     """
     A settings object, that allows Bazaar settings to be accessed as properties.
 
@@ -77,7 +75,9 @@ class CurrencySettings(object):
     and return the class, rather than the string literal.
     """
 
-    def __init__(self, user_settings=None, defaults=None, import_strings=None, mandatory=None):
+    def __init__(
+        self, user_settings=None, defaults=None, import_strings=None, mandatory=None
+    ):
         self.user_settings = user_settings or {}
         self.defaults = defaults or {}
         self.import_strings = import_strings or ()

@@ -8,15 +8,28 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
             name='ExchangeRate',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('source', models.PositiveSmallIntegerField(choices=[(0, 'Open Exchange Rates')], help_text='Where the exchange data comes from')),
+                (
+                    'id',
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name='ID',
+                    ),
+                ),
+                (
+                    'source',
+                    models.PositiveSmallIntegerField(
+                        choices=[(0, 'Open Exchange Rates')],
+                        help_text='Where the exchange data comes from',
+                    ),
+                ),
                 ('base_currency', models.CharField(max_length=3)),
                 ('rates', django.contrib.postgres.fields.jsonb.JSONField(default=dict)),
                 ('last_updated_at', models.DateTimeField(auto_now=True)),

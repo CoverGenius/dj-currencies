@@ -8,7 +8,10 @@ class ExchangeRateAdmin(admin.ModelAdmin):
         'base_currency',
         'last_updated_at',
     )
-    list_filter = ('source', 'base_currency',)
+    list_filter = (
+        'source',
+        'base_currency',
+    )
     date_hierarchy = 'last_updated_at'
 
 
