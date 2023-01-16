@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+    tags:
+      - v** # Run on all version tags
+  pull_request:
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.8", "3.9", "3.10", "3.11"]
+        django: ["3.2.16", "4.0.8", "4.1.5" ]
+        exclude:
+        # Excludes Python 3.11 for Django < 4.1
+        - python: "3.11"
+          django: "3.2.16"
+        - python: "3.11"
+          django: "4.0.8"
+
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 1s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python }}
+          architecture: x64
+      - run: pip install -U django==${{ matrix.django }}
+      - run: PGPASSWORD=postgres psql -c 'create database test_db;' -U postgres -h localhost -p 5432
+      - run: pip install -r requirements_test.txt
+      - run: python runtests.py
