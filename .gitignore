@@ -53,3 +53,5 @@ docs/_build
 # virtual envs
 .venv
 venv
+
+poetry.lock

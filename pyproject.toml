@@ -1,0 +1,43 @@
+[tool.poetry]
+name = "dj-currencies"
+version = "1.0.1"
+description = "A reusable Django app that integrates https://openexchangerates.org/"
+authors = ["Lihan <lihan@covergenius.com>"]
+license = "MIT"
+classifiers = [
+    'Development Status :: 5 - Production/Stable',
+    'Framework :: Django :: 3.0',
+    'Framework :: Django :: 4.0',
+    'Intended Audience :: Developers',
+    'License :: OSI Approved :: MIT',
+    'Natural Language :: English',
+    'Programming Language :: Python :: 3.8',
+    'Programming Language :: Python :: 3.9',
+    'Programming Language :: Python :: 3.10',
+    'Programming Language :: Python :: 3.11',
+]
+keywords = ["currency", "openexchangerates", "django"]
+documentation = "https://dj-currencies.readthedocs.io"
+repository = "https://github.com/CoverGenius/dj-currencies"
+homepage = "https://github.com/CoverGenius/dj-currencies"
+readme = "README.rst"
+maintainers = [
+    "Lihan Li <lihan@covergenius.com>",
+    "Nathan Chan <nathan.c@covergenius.com>",
+    "Artem Kolesnikov <artem@covergenius.com>",
+]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+Django = "^4.1.5"
+
+[tool.poetry.dev-dependencies]
+psycopg2-binary = "^2.9.5"
+factory-boy = "^3.2.1"
+mock = "^5.0.1"
+bump2version = "^1.0.1"
+pre-commit = "^2.21.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

@@ -1,5 +1,3 @@
-
-
 Documentation
 -------------
 
@@ -8,11 +6,9 @@ The full documentation is at https://dj-currencies.readthedocs.io.
 Quickstart
 ----------
 
-version 1.0.0 supports Django 3+ only
-
-For Django 2 support, please use version 0.1.2
-
-For Django 4 support, please user version >=2.0.0
+For Django 2 support, please use version 0.1.2.
+Django 3 support added in version 1.0.
+Django 4 support from version >=1.1.
 
 Install djcurrencies::
 

@@ -2,7 +2,7 @@ from dj_currencies.models import ExchangeRate
 import factory
 
 
-class ExchangeRateFactory(factory.DjangoModelFactory):
+class ExchangeRateFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = ExchangeRate
 
