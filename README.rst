@@ -1,9 +1,5 @@
 
 
-.. image:: https://travis-ci.org/brightwrite/dj-currencies.svg?branch=master
-    :target: https://travis-ci.org/brightwrite/dj-currencies
-
-
 Documentation
 -------------
 
