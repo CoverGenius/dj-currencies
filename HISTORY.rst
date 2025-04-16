@@ -26,3 +26,8 @@ History
 
 * Django 5.2+ support.
 * New PyPI release support
+
+1.4.0 (2025-04-16)
+------------------
+
+* PyPI trusted publisher configuration update.
