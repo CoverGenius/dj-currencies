@@ -20,3 +20,9 @@ History
 ------------------
 
 * Django 5.2+ support.
+
+1.3.0 (2025-04-16)
+------------------
+
+* Django 5.2+ support.
+* New PyPI release support
