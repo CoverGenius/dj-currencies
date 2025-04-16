@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "dj-currencies"
-version = "1.4.0"
+version = "1.5.0"
 description = "A reusable Django app that integrates https://openexchangerates.org/"
 authors = ["Lihan <lihan@covergenius.com>"]
 license = "MIT"

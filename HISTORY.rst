@@ -31,3 +31,8 @@ History
 ------------------
 
 * PyPI trusted publisher configuration update.
+
+1.5.0 (2025-04-16)
+------------------
+
+* Remove environment configuration from CI workflow
