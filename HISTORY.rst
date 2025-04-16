@@ -36,3 +36,8 @@ History
 ------------------
 
 * Remove environment configuration from CI workflow
+
+1.6.0 (2025-04-16)
+------------------
+
+* Update CI workflow configuration
