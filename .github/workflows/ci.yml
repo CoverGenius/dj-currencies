@@ -68,10 +68,6 @@ jobs:
     needs: tests
     runs-on: ubuntu-latest
 
-    environment:
-      name: pypi
-      url: https://pypi.org/p/dj-currencies
-
     permissions:
       id-token: write # mandatory for trusted publishing
 
