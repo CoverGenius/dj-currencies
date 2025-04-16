@@ -41,3 +41,8 @@ History
 ------------------
 
 * Update CI workflow configuration
+
+1.7.0 (2025-04-16)
+------------------
+
+* Update PyPI publishing configuration with packages-dir
