@@ -46,3 +46,9 @@ History
 ------------------
 
 * Update PyPI publishing configuration with packages-dir
+
+1.8.0 (2026-03-26)
+------------------
+
+* Add Python 3.12/3.13/3.14 support
+* Fix pre-commit CI compatibility
